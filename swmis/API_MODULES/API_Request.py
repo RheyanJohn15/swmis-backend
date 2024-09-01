@@ -1,4 +1,5 @@
 from .v1.User import User
+from .v1.TruckDriver import TruckDriver
 from datetime import datetime
 class ApiRequest:
 
@@ -11,8 +12,13 @@ class ApiRequest:
 		action = User(self.method, self.request)
 		return action.result()
 
+	def _truckdriver(self):
+		action = TruckDriver(self.method, self.request)
+		return action.result()
+	
 	switch_dict = {
 		'user': '_user',
+		'truckdriver': '_truckdriver',
 	}
 	
 	def switch(self):

@@ -53,3 +53,38 @@ class RefreshToken(models.Model):
 
     def __str__(self):
         return f"RefreshToken(user={self.user}, token={self.token})"
+
+from django.db import models
+
+class Driver(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    username = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=255)  # Make sure to hash the password
+    license = models.CharField(max_length=50)
+    contact = models.CharField(max_length=20, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        # Check if the password needs to be hashed
+        if not self.password.startswith('pbkdf2_sha256$'):
+            self.password = make_password(self.password)
+        super(Driver, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.username
+
+class Truck(models.Model):
+    model = models.CharField(max_length=50)
+    plate_number = models.CharField(max_length=20, unique=True)
+    can_carry = models.FloatField()  # Capacity in tons
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='trucks')
+    status = models.CharField(max_length=20, default='active')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.model} ({self.plate_number})"
+

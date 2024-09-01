@@ -93,32 +93,33 @@ class APIEntry:
                 'requires_authentication': False,
                 'method': 'POST'
             },
-            'add': {
+           
+        },
+
+        'truckdriver':{
+             'addtruck': {
                 'required_fields': {
-                    'name': 'string',
-                    'username': 'string',
-                    'password': 'string',
-                    'user_type': 'string',
-                    'emp_id': 'string'
+                    'model': 'string',
+                    'plate_number': 'string',
+                    'can_carry': 'string',
+                    'driver': 'string',
                 },
                 'requires_authentication': True,
                 'method': 'POST'
             },
-            'details':{
-                'required_fields': {'id': 'string'},
+             'adddriver': {
+                'required_fields': {
+                    'fname': 'string',
+                    'lname': 'string',
+                    'username': 'string',
+                    'password': 'string',
+                    'license': 'string',
+                    'contact': 'string',
+                    'address': 'string',
+                },
                 'requires_authentication': True,
                 'method': 'POST'
             },
-            'list': {
-                'required_fields': {},
-                'requires_authentication': True,
-                'method': 'GET'
-            },
-            'employees': {
-                'required_fields': {},
-                'requires_authentication': True,
-                'method': 'GET'
-            },
-        },
+        }
         
     }
