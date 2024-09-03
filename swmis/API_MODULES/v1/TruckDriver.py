@@ -5,12 +5,16 @@ from swmis.serializers import TruckSerializer, DriverSerializer
 class TruckDriver:
 
     def __init__(self, method, request):
-        self.data = json.loads(request.body)
+        
+        if request.method != 'GET':
+            self.data = json.loads(request.body)
 
         if method == 'addtruck':
             self._addtruck()
         elif method == 'adddriver':
             self._adddriver()
+        elif method == 'listdriver':
+            self._listdriver()
 
     
     def _adddriver(self):
@@ -28,16 +32,18 @@ class TruckDriver:
         )
 
         driver.save()
+        serialize =  DriverSerializer(driver)
 
-        self.response = ['success', 'Driver Successfully added to the system', DriverSerializer(driver).data ]
+        self.response = ['success', 'Driver Successfully added to the system', serialize.data ]
     
     def _addtruck(self):
         data = self.data
+        driver_instance = Driver.objects.get(id=data.get('driver'))
         truck = Truck(
             model = data.get('model'),
             plate_number = data.get('plate_number'),
             can_carry = data.get('can_carry'),
-            driver = data.get('driver'),
+            driver = driver_instance,
             created_at = datetime.now(),
             updated_at = datetime.now()
         )
@@ -45,6 +51,20 @@ class TruckDriver:
         truck.save()
 
         self.response = ['success', 'Truck Successfully added to the system', TruckSerializer(truck).data]
+
+    def _listdriver(self):
+        driver = Driver.objects.all()
+
+        serialize = DriverSerializer(driver, many=True)
+
+        self.response = ['success', 'Get all Driver data', serialize.data]
+
+    def _listtruck(self):
+        truck = Truck.objects.all()
+
+        serialize = TruckSerializer(truck, many=True)
+
+        self.response = ['success', 'Get all truck data', serialize.data]
 
     def result(self):
         return self.response

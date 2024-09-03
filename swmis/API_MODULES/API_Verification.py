@@ -120,6 +120,16 @@ class APIEntry:
                 'requires_authentication': True,
                 'method': 'POST'
             },
+            'listdriver': {
+                'required_fields': {},
+                'requires_authentication': True,
+                'method': 'GET'
+            },
+             'listtruck': {
+                'required_fields': {},
+                'requires_authentication': True,
+                'method': 'GET'
+            },
         }
         
     }

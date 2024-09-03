@@ -16,7 +16,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
 class DriverSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Driver
+        model = Driver
         fields = [
             'id',
             'first_name',
@@ -31,7 +31,7 @@ class DriverSerializer(serializers.ModelSerializer):
 
 class TruckSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Truck
+        model = Truck
         fields = [
          'id',
          'model',
