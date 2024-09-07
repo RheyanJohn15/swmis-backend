@@ -15,6 +15,9 @@ class TruckDriver:
             self._adddriver()
         elif method == 'listdriver':
             self._listdriver()
+        elif method == 'listtruck':
+            self._listtruck()
+        
 
     
     def _adddriver(self):
@@ -56,6 +59,9 @@ class TruckDriver:
         driver = Driver.objects.all()
 
         serialize = DriverSerializer(driver, many=True)
+        for d in serialize.data:
+            d['deletelink'] = 'truckdriver/deletedriver/'
+            d['editlink'] = 'truckdriver/updatedriver/'
 
         self.response = ['success', 'Get all Driver data', serialize.data]
 
@@ -63,6 +69,9 @@ class TruckDriver:
         truck = Truck.objects.all()
 
         serialize = TruckSerializer(truck, many=True)
+        for d in serialize.data:
+            d['deletelink'] = 'truckdriver/deletetruck/'
+            d['editlink'] = 'truckdriver/updatetruck/'
 
         self.response = ['success', 'Get all truck data', serialize.data]
 

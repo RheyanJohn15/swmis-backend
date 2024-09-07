@@ -130,6 +130,45 @@ class APIEntry:
                 'requires_authentication': True,
                 'method': 'GET'
             },
+            'updatetruck':{
+                'required_fields': {
+                    'id': 'string',
+                    'model': 'string',
+                    'plate_number': 'string',
+                    'can_carry': 'string',
+                    'driver': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
+            },
+            'updatedriver':{
+                'required_fields': {
+                    'id': 'string',
+                    'fname': 'string',
+                    'lname': 'string',
+                    'username': 'string',
+                    'password': 'string',
+                    'license': 'string',
+                    'contact': 'string',
+                    'address': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
+            },
+            'deletedriver': {
+                'required_fields': {
+                    'id': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
+            },
+            'deletetruck': {
+                'required_fields': {
+                    'id': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
+            }
         }
         
     }
