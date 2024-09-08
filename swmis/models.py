@@ -87,4 +87,26 @@ class Truck(models.Model):
 
     def __str__(self):
         return f"{self.model} ({self.plate_number})"
+    
+class Routes(models.Model):
+    route_name = models.CharField(max_length=50)
+    coordinates = models.TextField()
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='driver')
+    schedule = models.CharField(max_length=100, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.route_name
+
+class Complaints(models.Model):
+    complainant = models.CharField(max_length=50)
+    remarks = models.TextField()
+    contact = models.CharField(max_length=100, null=True)
+    location = models.CharField(max_length=100, null=True)
+    nature = models.CharField(max_length=100, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.complainant

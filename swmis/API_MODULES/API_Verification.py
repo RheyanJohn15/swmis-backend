@@ -169,6 +169,23 @@ class APIEntry:
                 'requires_authentication': True,
                 'method': 'POST'
             }
+        },
+
+        'routes': {
+            'add': {
+                 'required_fields': {
+                    'route_name': 'string',
+                    'coordinates': 'string',
+                    'driver': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
+            },
+            'list':{
+                'required_fields': {},
+                'requires_authentication': True,
+                'method': 'GET'
+            }
         }
         
     }

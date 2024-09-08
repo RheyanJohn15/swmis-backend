@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserAccount, Truck, Driver
+from .models import UserAccount, Truck, Driver, Routes
 
 
 
@@ -41,4 +41,17 @@ class TruckSerializer(serializers.ModelSerializer):
          'status',
          'created_at',
          'updated_at'   
+        ]
+
+class RouteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Routes
+        fields =[
+            'id',
+            'route_name',
+            'coordinates',
+            'driver',
+            'schedule',
+            'created_at',
+            'updated_at'
         ]

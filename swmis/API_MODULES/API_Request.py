@@ -1,6 +1,7 @@
 from .v1.User import User
 from .v1.TruckDriver import TruckDriver
 from datetime import datetime
+from .v1.Routes import RoutesClass
 class ApiRequest:
 
 	def __init__(self, type, method, request):
@@ -16,9 +17,14 @@ class ApiRequest:
 		action = TruckDriver(self.method, self.request)
 		return action.result()
 	
+	def _routes(self):
+		action = RoutesClass(self.method, self.request)
+		return action.result()
+	
 	switch_dict = {
 		'user': '_user',
 		'truckdriver': '_truckdriver',
+		'routes': '_routes',
 	}
 	
 	def switch(self):
