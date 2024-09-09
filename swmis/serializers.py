@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserAccount, Truck, Driver, Routes
+from .models import UserAccount, Truck, Driver, Routes, Complaints
 
 
 
@@ -54,4 +54,18 @@ class RouteSerializer(serializers.ModelSerializer):
             'schedule',
             'created_at',
             'updated_at'
+        ]
+
+class ComplaintSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Complaints
+
+        fields = [
+            'complainant',
+            'remarks',
+            'contact',
+            'location',
+            'nature',
+            'created_at',
+            'update_at'
         ]

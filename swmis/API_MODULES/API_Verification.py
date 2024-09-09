@@ -186,6 +186,18 @@ class APIEntry:
                 'requires_authentication': True,
                 'method': 'GET'
             }
+        },
+        'complaints': {
+            'sendmessage': {
+                'required_fields': {
+                    'complainant': 'string',
+                    'contact': 'string',
+                    'nature': 'string',
+                    'remark': 'string'
+                },
+                'requires_authentication': False,
+                'method': 'POST'
+            }
         }
         
     }
