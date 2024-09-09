@@ -61,11 +61,12 @@ class ComplaintSerializer(serializers.ModelSerializer):
         model = Complaints
 
         fields = [
+            'id',
             'complainant',
             'remarks',
             'contact',
             'location',
             'nature',
             'created_at',
-            'update_at'
+            'updated_at'
         ]

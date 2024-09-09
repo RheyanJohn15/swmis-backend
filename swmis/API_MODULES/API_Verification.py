@@ -197,6 +197,11 @@ class APIEntry:
                 },
                 'requires_authentication': False,
                 'method': 'POST'
+            },
+             'list':{
+                'required_fields': {},
+                'requires_authentication': True,
+                'method': 'GET'
             }
         }
         
