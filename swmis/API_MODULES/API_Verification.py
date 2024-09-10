@@ -168,6 +168,20 @@ class APIEntry:
                 },
                 'requires_authentication': True,
                 'method': 'POST'
+            },
+            'truckdetail': {
+                'required_fields': {
+                    'id': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
+            },
+            'driverdetail': {
+                'required_fields': {
+                    'id': 'string',
+                },
+                'requires_authentication': True,
+                'method': 'POST'
             }
         },
 

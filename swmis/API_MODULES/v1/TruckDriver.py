@@ -21,6 +21,10 @@ class TruckDriver:
             self._deletetruck()
         elif method == 'deletedriver':
             self._deletedriver()
+        elif method == 'truckdetail':
+            self._truckdetail()
+        elif method == 'driverdetail':
+            self._driverdetail()
 
     def _adddriver(self):
         data = self.data
@@ -111,6 +115,26 @@ class TruckDriver:
             d['editlink'] = 'truckdriver/updatedriver/'
 
         self.response = ['success', 'Successfully deleted driver', serializeDriver.data]
+
+    def _truckdetail(self):
+        
+        truck_id = self.data.get('id')
+        truck = Truck.objects.get(id=truck_id)
+        serialize = TruckSerializer(truck)
+        driver = Driver.objects.get(id=serialize.data['driver'])
+        driverData = DriverSerializer(driver)
+
+        self.response = ['success', 'Get Truck Details', dict(serialize.data, driverdata=driverData.data)]
+
+    
+    def _driverdetail(self):
+        driver_id = self.data.get('id')
+
+        driver = Driver.objects.get(id=driver_id)
+
+        serialize = DriverSerializer(driver)
+
+        self.response = ['success', 'Get Driver Detail', serialize.data]
 
     def result(self):
         return self.response
