@@ -11,8 +11,10 @@ class ComplaintClass:
         
         if method == 'sendmessage':
             self._sendmessage()
-        if method == 'list':
+        elif method == 'list':
             self._list()
+        elif method == 'details':
+            self._details()
 
     def _sendmessage(self):
         data = self.data
@@ -39,5 +41,11 @@ class ComplaintClass:
 
         self.response = ['success', 'Get all complaints', serialize.data]
 
+    def _details(self):
+        comp = Complaints.objects.get(id=self.data.get('id'))
+        serialize = ComplaintSerializer(comp)
+
+        self.response = ['success', 'Successfully Get the details', serialize.data]
+        
     def result(self):
         return self.response

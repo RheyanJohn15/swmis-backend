@@ -147,7 +147,6 @@ class APIEntry:
                     'fname': 'string',
                     'lname': 'string',
                     'username': 'string',
-                    'password': 'string',
                     'license': 'string',
                     'contact': 'string',
                     'address': 'string',
@@ -216,6 +215,11 @@ class APIEntry:
                 'required_fields': {},
                 'requires_authentication': True,
                 'method': 'GET'
+            },
+              'details':{
+                'required_fields': {'id': 'strings'},
+                'requires_authentication': True,
+                'method': 'POST'
             }
         }
         

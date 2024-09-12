@@ -25,6 +25,10 @@ class TruckDriver:
             self._truckdetail()
         elif method == 'driverdetail':
             self._driverdetail()
+        elif method == 'updatetruck':
+            self._updatetruck()
+        elif method == 'updatedriver':
+            self._updatedriver()
 
     def _adddriver(self):
         data = self.data
@@ -135,6 +139,39 @@ class TruckDriver:
         serialize = DriverSerializer(driver)
 
         self.response = ['success', 'Get Driver Detail', serialize.data]
+
+    def _updatetruck(self):
+        data = self.data
+
+        truck = Truck.objects.get(id=data.get(id))
+
+        truck.model = data.get('model')
+        truck.plate_number = data.get('plate_number')
+        truck.can_carry = data.get('can_carry')
+        
+        driver = Driver.objects.get(id=data.get('driver'))
+        truck.driver = driver
+        date = datetime.now()
+        truck.updated_at = date
+
+        truck.save()
+
+        self.response = ['success', "Truck Details successfully updated", TruckSerializer(truck).data]
+
+    def _updatedriver(self):
+        data = self.data
+
+        driver = Driver.objects.get(id=data.get("id"))
+
+        driver.first_name = data.get('fname')
+        driver.last_name = data.get('lname')
+        driver.username = data.get('username')
+        driver.license = data.get('license')
+        driver.contact =data.get('contact')
+        driver.address = data.get('address')
+        driver.save()
+
+        self.response = ['success', 'Driver Details successfully updated', DriverSerializer(driver).data]
 
     def result(self):
         return self.response
