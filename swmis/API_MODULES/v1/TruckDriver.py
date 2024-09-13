@@ -156,7 +156,9 @@ class TruckDriver:
 
         truck.save()
 
-        self.response = ['success', "Truck Details successfully updated", TruckSerializer(truck).data]
+        newTruck = Truck.objects.all()
+
+        self.response = ['success', "Truck Details successfully updated", TruckSerializer(newTruck).data]
 
     def _updatedriver(self):
         data = self.data
@@ -171,7 +173,9 @@ class TruckDriver:
         driver.address = data.get('address')
         driver.save()
 
-        self.response = ['success', 'Driver Details successfully updated', DriverSerializer(driver).data]
+        newDriver = Driver.objects.all()
+
+        self.response = ['success', 'Driver Details successfully updated', DriverSerializer(newDriver).data]
 
     def result(self):
         return self.response
